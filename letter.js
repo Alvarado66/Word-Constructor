@@ -15,6 +15,10 @@ const Letter = function(char) {
            this.used = true;
        }
    }
+
+//    this.toString = funtion() {
+//        return this.char;
+//    } 
 }
 
 module.exports = Letter;
