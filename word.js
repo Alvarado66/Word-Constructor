@@ -27,6 +27,4 @@ const Word = function (initialWord) {
 
 }
 
-
-
 module.exports = Word;
