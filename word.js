@@ -22,11 +22,11 @@ const Word = function (initialWord) {
                 word.push(" ");
             }
         }
-    
         console.log(word.join(" "));
     }
 
 }
 
-const myWord = new Word("bored")
-myWord.showWord()
+
+
+module.exports = Word;
