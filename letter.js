@@ -3,9 +3,11 @@ const Letter = function(char) {
     this.used = false;
     this.guessed = function() {
         if (this.used){
-            return char
+            
+            return this.char
         }
         else {
+            
             return "_";
         }
     }
@@ -16,9 +18,6 @@ const Letter = function(char) {
        }
    }
 
-//    this.toString = funtion() {
-//        return this.char;
-//    } 
 }
 
 module.exports = Letter;
