@@ -3,11 +3,52 @@ var inquirer = require("inquirer");
 
 let playTime = [
     "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
-    "Squirtle", "Wartortle", 
-    "Blastois", "Pidgey", "Pidgeotto", "Pidgeot",
-    "Pikachu", "Raichu", "Jigglypuff", "Wigglytuff",
+    "Squirtle", "Wartortle", "Blastois",
+    "Pidgey", "Pidgeotto", "Pidgeot",
+    "Pikachu", "Raichu",
+    "Jigglypuff", "Wigglytuff",
 ]
 
+var remainingGuesses = 10;
+var lettersGuessed = [];
+var alreadyUsed = [];
+
+
 function iChooseYou() {
-    let randomPoke = new Word(playTime[Math.ceil(Math.random() * playTime.length -1 )])
-} 
+    let randomPoke = new Word(playTime[Math.floor(Math.random() * playTime.length)])
+
+    askUser(randomPoke);
+}
+
+iChooseYou();
+
+function askUser(pokemon) {
+    
+    if (remainingGuesses > 0 && pokemon.showWord().indexOf("_") !== - 1) {
+        inquirer
+            .prompt([
+                {
+                    type: "input",
+                    message: "Who's that Pokemon?",
+                    name: "pokeplayer"
+                },
+            ])
+            .then(function (answer) {
+                if (pokemon.initialWord.includes(answer.pokeplayer)) {
+                    console.log("correct");
+                    pokemon.guess(answer.pokeplayer);
+                    // pokemon.showWord();
+                    askUser(pokemon);
+                }
+                else {
+                    console.log("Sorry, try again trainer!");
+                    remainingGuesses--;
+                    pokemon.guess(answer.userInput);
+                    // pokemon.showWord();
+                    console.log('You have ' + remainingGuesses + ' Pokeballs left. ');
+                    askUser(pokemon)
+                }
+            })
+    }
+
+}
