@@ -19,7 +19,7 @@ function iChooseYou() {
     let randomPoke = new Word(playTime[Math.floor(Math.random() * playTime.length)])
 
     askUser(randomPoke);
-    
+
 }
 
 iChooseYou();
@@ -75,9 +75,9 @@ function askUser(pokemon) {
                 }
             })
 
-            // playAgain();
+       
     }
 
-    
+
 
 }
