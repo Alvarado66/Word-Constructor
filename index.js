@@ -12,18 +12,19 @@ let playTime = [
 var remainingGuesses = 10;
 var lettersGuessed = [];
 var alreadyUsed = [];
+var startGame = true;
 
 
 function iChooseYou() {
     let randomPoke = new Word(playTime[Math.floor(Math.random() * playTime.length)])
 
     askUser(randomPoke);
+    
 }
 
 iChooseYou();
 
 function askUser(pokemon) {
-    
     if (remainingGuesses > 0 && pokemon.showWord().indexOf("_") !== - 1) {
         inquirer
             .prompt([
@@ -50,5 +51,33 @@ function askUser(pokemon) {
                 }
             })
     }
+
+    function playAgain() {
+        inquirer.prompt([
+            {
+                type: "confirm",
+                name: "confirm",
+                message: "Would you like to play again?",
+                default: true
+            }
+        ])
+            .then(function (user) {
+                if (user.confirm) {
+                    startGame = true;
+                    lettersGuessed = [];
+                    remainingGuesses = 10;
+                    iChooseYou();
+                    askUser();
+                    startGame();
+                    if (alreadyUsed.length === playTime.length) {
+                        alreadyUsed = [];
+                    }
+                }
+            })
+
+            // playAgain();
+    }
+
+    
 
 }
